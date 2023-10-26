@@ -37,6 +37,19 @@ public class User {
 
     private boolean deleted;
 
+    public User() { }
+
+    public User(String nickname, String email) {
+        this.nickname = nickname;
+        this.email = email;
+    }
+
+    public User(Long id, String nickname, String email) {
+        this.id = id;
+        this.nickname = nickname;
+        this.email = email;
+    }
+
 
     public Long getId() {
         return id;

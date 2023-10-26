@@ -13,11 +13,15 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     public List<User> loadAllUsers() {
-        return userRepository.findAllByDeleted(false);
+        return userRepository.findByDeleted(false);
     }
 
     public User loadUser(long id) {
@@ -25,23 +29,26 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public void createUser(User user) {
-        userRepository.save(user);
+    public String createUser(User user) {
+        User savedUser = userRepository.save(user);
+        return String.format("user with id = %s successfully created", savedUser.getId());
     }
 
-    public void updateUser(User user, long id) {
+    public String updateUser(User user, long id) {
         if (!userRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         userRepository.save(user);
+        return String.format("user with id = %s successfully updated", user.getId());
     }
 
     @Transactional
-    public void deleteUser(long id) {
+    public String deleteUser(long id) {
         if (!userRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         userRepository.findById(id)
                 .ifPresent(user -> user.setDeleted(true));
+        return String.format("user with id = %s successfully deleted", id);
     }
 }
