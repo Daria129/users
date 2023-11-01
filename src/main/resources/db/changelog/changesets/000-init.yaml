@@ -1,0 +1,108 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000-1
+      author: daria
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fatherName
+                  type: varchar
+              - column:
+                  name: gender
+                  type: varchar
+              - column:
+                  name: birthDate
+                  type: date
+              - column:
+                  name: city
+                  type: varchar
+              - column:
+                  name: avatarLink
+                  type: varchar
+              - column:
+                  name: description
+                  type: varchar
+              - column:
+                  name: nickname
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: hardSkills
+                  type: varchar
+              - column:
+                  name: email
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: phoneNumber
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: deleted
+                  type: boolean
+
+  - changeSet:
+      id: 000-2
+      author: daria
+      changes:
+        - createTable:
+            tableName: subscription
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: publisher_id
+                  type: int
+              - column:
+                  name: subscriber_id
+                  type: int
+
+  - changeSet:
+      id: 000-3
+      author: daria
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: user_publisher_fk
+            baseTableName: subscription
+            baseColumnNames: publisher_id
+            referencedTableName: user
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            constraintName: user_subscriber_fk
+            baseTableName: subscription
+            baseColumnNames: subscriber_id
+            referencedTableName: user
+            referencedColumnNames: id
+
+
+
