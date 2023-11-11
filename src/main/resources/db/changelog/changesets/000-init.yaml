@@ -24,19 +24,19 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: fatherName
+                  name: father_name
                   type: varchar
               - column:
                   name: gender
                   type: varchar
               - column:
-                  name: birthDate
+                  name: birth_date
                   type: date
               - column:
                   name: city
                   type: varchar
               - column:
-                  name: avatarLink
+                  name: avatar_link
                   type: varchar
               - column:
                   name: description
@@ -48,7 +48,7 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: hardSkills
+                  name: hard_skills
                   type: varchar
               - column:
                   name: email
@@ -57,7 +57,7 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: phoneNumber
+                  name: phone_number
                   type: varchar
                   constraints:
                     nullable: false
