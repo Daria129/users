@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  psql:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: pgadmin
+      POSTGRES_PASSWORD: pgpassword
+      PG_DATA: /var/lib/postgresql/data
+    restart: unless-stopped
+
+  users:
+    image: users:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - psql
